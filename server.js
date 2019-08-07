@@ -1,12 +1,11 @@
 const express = require('express')
+const userRoutes = require('./routes/userRoutes.js')
 
-const app = express();
+const app = express()
 
-app.use('/user', './routes/userRoutes.js')
 
-app.get('/', (req, res) => {
-    res.send("hello")
-})
+app.use('/user', userRoutes)
+
 
 app.listen(3000, () => {
     console.log("Listening on http://localhost:3000")
