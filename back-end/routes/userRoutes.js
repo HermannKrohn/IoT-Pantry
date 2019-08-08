@@ -6,5 +6,6 @@ router
     .get('/login', userController.loginPage)
     .get('/sign-up', userController.signUpPage)
     .get('/:username/pantry', userController.userPantry)
+    .post('/new-user', userController.createUser)
 
 module.exports = router

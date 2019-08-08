@@ -1,12 +1,13 @@
 const connection = require('../DB/knexConnection')
 
 class userModel {
-    static findByID(id){
-        return connection.select().from('users').where('id', id)
-    }
 
     static findByUsername(username){
-        return connection.select().from('users').where('userName', username)
+        return connection.from('users').select().where('userName', '=', username)
+    }
+
+    static createUser(userInputs){
+        return connection('users').insert(userInputs)
     }
 }
 
