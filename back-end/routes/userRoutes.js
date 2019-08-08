@@ -4,12 +4,7 @@ const userController = require('../controllers/userController')
 
 router
     .get('/login', userController.loginPage)
-    .get('/sign-up', (req, res) => {
-        res.send("Sign Up Page")
-    })
-    .get('/:username/pantry', (req, res) => {
-        console.log(req.params)
-        res.send("Pantry")
-    })
+    .get('/sign-up', userController.signUpPage)
+    .get('/:username/pantry', userController.userPantry)
 
 module.exports = router
