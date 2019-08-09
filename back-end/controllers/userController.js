@@ -1,5 +1,6 @@
 const userModel = require('../models/userModel')
 const validator = require('validator')
+const jwt = require('jwt-simple')
 
 class userController {
 
@@ -21,11 +22,10 @@ class userController {
         if (!validator.isEmail(record.email)) {
             errors["emailInvalid"] = "Invalid Email"
         }
-        if (record.password_digest.length < 5) {
+        if (record.password.length < 5) {
             errors["passwordLength"] = "Password must be at least 5 characters"
         }
         return errors
-
     }
 
     static loginPage = (req, res) => {
@@ -45,14 +45,34 @@ class userController {
         let inputs = req.body
         let errors = await this.validateRecord(inputs)
         if (Object.keys(errors).length === 0) {
-            userModel.createUser(inputs).then(() => {
-                res.json({ status: "Successfully created User" })
+            let hashedPassword = await userModel.hashPassword(inputs.password)
+            let newUser = {
+                firstName: inputs.firstName,
+                lastName: inputs.lastName,
+                userName: inputs.userName,
+                email: inputs.email,
+                password_digest: hashedPassword
+            }
+            userModel.createUser(newUser).then((IDArray) => {
+                let token = userModel.generateJWT(IDArray[0])
+                res.json({ status: "Success", token: token})
             }).catch((err) => {
-                res.status(500).json({ status: "An Error Occured. Try again" })
+                res.status(500).json({ status: "Error" })
                 next(err)
             })
         } else {
-            res.status(400).json({ status: errors });
+            res.status(400).json({ status: "Error", errors: errors });
+        }
+    }
+
+    static authenticate = async (req, res, next) => {
+        let {username, password} = req.body
+        let userArr = await userModel.findByUsername(username)
+        if(await userModel.checkCrendentials(password, userArr)){
+            let token = userModel.generateJWT(userArr[0].id)
+            res.json({ status: "Success", token: token})
+        }else{
+            res.status(400).json({ status: "Error", errors: {"unableToAuthenticate": "Username or password incorrect. Try again."} });
         }
     }
 }
