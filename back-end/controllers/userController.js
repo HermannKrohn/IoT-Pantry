@@ -57,11 +57,11 @@ class userController {
                 let token = userModel.generateJWT(IDArray[0])
                 res.json({ status: "Success", token: token})
             }).catch((err) => {
-                res.status(500).json({ status: "Error" })
+                res.json({ status: "Error", errors: {"InternalServerError": "An Error occured. Try again."} })
                 next(err)
             })
         } else {
-            res.status(400).json({ status: "Error", errors: errors });
+            res.json({ status: "Error", errors: errors });
         }
     }
 
@@ -72,7 +72,7 @@ class userController {
             let token = userModel.generateJWT(userArr[0].id)
             res.json({ status: "Success", token: token})
         }else{
-            res.status(400).json({ status: "Error", errors: {"unableToAuthenticate": "Username or password incorrect. Try again."} });
+            res.json({ status: "Error", errors: {"unableToAuthenticate": "Username or password incorrect. Try again."} });
         }
     }
 }
