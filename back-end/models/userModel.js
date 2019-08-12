@@ -9,6 +9,10 @@ class userModel {
         return connection('users').select().where('userName', username);
     }
 
+    static findByID(id){
+        return connection('users').select().where('id', id)
+    }
+
     static createUser(userInputs){
         return connection('users').insert(userInputs)
     }

@@ -25,6 +25,9 @@ class userController {
         if (record.password.length < 5) {
             errors["passwordLength"] = "Password must be at least 5 characters"
         }
+        if(record.hardwarePin.length !== 4){
+            errors["invalidPinLength"] = "Pin must be 4 digits"
+        }
         return errors
     }
 
@@ -51,7 +54,8 @@ class userController {
                 lastName: inputs.lastName,
                 userName: inputs.userName,
                 email: inputs.email,
-                password_digest: hashedPassword
+                password_digest: hashedPassword,
+                hardwarePin: parseInt(inputs.hardwarePin)
             }
             userModel.createUser(newUser).then((IDArray) => {
                 let token = userModel.generateJWT(IDArray[0])

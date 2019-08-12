@@ -1,5 +1,6 @@
 const express = require('express')
 const userRoutes = require('./routes/userRoutes.js')
+const hardwareRoutes = require('./routes/hardwareRoutes.js')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
@@ -13,6 +14,7 @@ app.use(cors({ origin: 'http://localhost:3000', credentials: true}))
 
 
 app.use('/user', userRoutes)
+app.use('/hardware', hardwareRoutes)
 
 
 app.listen(3001, () => {

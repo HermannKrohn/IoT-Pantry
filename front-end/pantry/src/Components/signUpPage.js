@@ -12,7 +12,8 @@ let formSubmit = (event) => {
             "lastName": event.target['lastNameField'].value,
             "userName": event.target['usernameField'].value,
             "email": event.target['emailField'].value,
-            "password": event.target['passwordField'].value
+            "password": event.target['passwordField'].value,
+            "hardwarePin": event.target['pinField'].value
         })
     }).then(res => {
         return res.json()
@@ -24,6 +25,7 @@ let formSubmit = (event) => {
         }else{
             //clear local storage token. Update store with errors. Then re-render sign-up page
             localStorage.removeItem('token')
+            console.log(json.errors)
         }
     })
 }
@@ -52,7 +54,11 @@ function signUp(){
                     <label>Password:</label>
                     <input name="passwordField" type="text" />
                 </div>
-                <button type="submit">Login</button>
+                <div>
+                    <label>4-digit Pin:</label>
+                    <input name="pinField" type="number" />
+                </div>
+                <button type="submit">Sign up</button>
             </form>
         </div>
     )
