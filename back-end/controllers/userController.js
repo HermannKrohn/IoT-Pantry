@@ -59,13 +59,13 @@ class userController {
             }
             userModel.createUser(newUser).then((IDArray) => {
                 let token = userModel.generateJWT(IDArray[0])
-                res.json({ status: "Success", token: token})
+                res.json({status: "Success", token: token})
             }).catch((err) => {
-                res.json({ status: "Error", errors: {"InternalServerError": "An Error occured. Try again."} })
+                res.json({status: "Error", errors: {"InternalServerError": "An Error occured. Try again."} })
                 next(err)
             })
         } else {
-            res.json({ status: "Error", errors: errors });
+            res.json({status: "Error", errors: errors });
         }
     }
 
