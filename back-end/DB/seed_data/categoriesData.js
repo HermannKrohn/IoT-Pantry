@@ -1,29 +1,29 @@
 const connection = require('../knexConnection')
 
-function getID(itemName){
-    return connection.select('id').from('pantryItems').where('itemName', itemName)
+function getID(username){
+    return connection.select('id').from('users').where('userName', username)
 }
 
 let categoriesData = [
     {
         category: "Dairy",
-        itemID: getID("Milk")
+        userID: getID("jp123")
     },
     {
         category: "Chicken",
-        itemID: getID("Eggs")
+        userID: getID("jp123")
     },
     {
         category: "Chocolate",
-        itemID: getID("Nutella")
+        userID: getID("ap123")
     },
     {
         category: "Grain",
-        itemID: getID("Bread")
+        userID: getID("ap123")
     },
     {
         category: "Snack",
-        itemID: getID("Oreos")
+        userID: getID("jc123")
     }
 ]
 

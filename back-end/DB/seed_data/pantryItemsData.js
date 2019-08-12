@@ -6,24 +6,19 @@ function getID(firstname){
 
 let pantryItemsData = [
     {
-        itemName: "Milk",
-        userID: getID("Jack")
+        itemName: "Milk"
     },
     {
-        itemName: "Eggs",
-        userID: getID("Jack")
+        itemName: "Eggs"
     },
     {
-        itemName: "Nutella",
-        userID: getID("Avery")
+        itemName: "Nutella"
     },
     {
-        itemName: "Bread",
-        userID: getID("Juan")
+        itemName: "Bread"
     },
     {
-        itemName: "Oreos",
-        userID: getID("Juan")
+        itemName: "Oreos"
     }
 ]
 

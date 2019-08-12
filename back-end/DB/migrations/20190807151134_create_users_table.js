@@ -7,6 +7,7 @@ exports.up = function(knex) {
             table.string('lastName').notNullable()
             table.string('userName').notNullable()
             table.string('email').notNullable()
+            table.integer('hardwarePin').notNullable()
             table.timestamp('created_at', { precision: 6 }).defaultTo(knex.fn.now(6))
             table.timestamp('updated_at', { precision: 6 }).defaultTo(knex.fn.now(6))
         })
