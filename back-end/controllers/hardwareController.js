@@ -10,6 +10,7 @@ class hardwareController{
             let categoryIDArr = await categoryModel.newEntry({category: inputs.category, userID: inputs.userID})
             let pantryItemIDArr = await pantryModel.newEntry({itemName: inputs.itemName})
             await categoryItemModel.newEntry({categoryID: categoryIDArr[0], itemID: pantryItemIDArr[0]})
+            //Insert socket emit here. The socket emission should update users front end view with new item
             res.json({status: "Success"})
         }else{
             res.json({status: "Error"})
