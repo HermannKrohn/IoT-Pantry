@@ -19,7 +19,19 @@ class hardwareController{
     }
 
     static removeItem = async (req, res) => {
-        
+        let inputs = req.body
+        if(await this.checkPin(inputs.pin, inputs.userID)){
+            let itemToRemoveArr = await pantryModel.removeEntry(inputs.userID, inputs.UID)
+            if(itemToRemoveArr.length > 0){
+                pantryModel.delete(itemToRemoveArr[0].id)
+                categoryModel.delete(itemToRemoveArr[0].catID)
+                res.send("Success")
+            }else{
+                res.send("Error")
+            }
+        }else{
+            res.send("Error")
+        }
     }
 
     static checkPin = async (pin, userID) => {

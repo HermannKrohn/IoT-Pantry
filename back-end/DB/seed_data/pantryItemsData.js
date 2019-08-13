@@ -6,19 +6,24 @@ function getID(firstname){
 
 let pantryItemsData = [
     {
-        itemName: "Milk"
+        itemName: "Milk",
+        UID: "1A 1A 1A 1A"
     },
     {
-        itemName: "Eggs"
+        itemName: "Eggs",
+        UID: "1A 1A 1A 1A"
     },
     {
-        itemName: "Nutella"
+        itemName: "Nutella",
+        UID: "1A 1A 1A 1A"
     },
     {
-        itemName: "Bread"
+        itemName: "Bread",
+        UID: "1A 1A 1A 1A"
     },
     {
-        itemName: "Oreos"
+        itemName: "Oreos",
+        UID: "1A 1A 1A 1A"
     }
 ]
 
