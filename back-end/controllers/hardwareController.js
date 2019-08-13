@@ -25,12 +25,12 @@ class hardwareController{
             if(itemToRemoveArr.length > 0){
                 pantryModel.delete(itemToRemoveArr[0].id)
                 categoryModel.delete(itemToRemoveArr[0].catID)
-                res.send("Success")
+                res.json({status: "Success"})
             }else{
-                res.send("Error")
+                res.json({status: "Error"})
             }
         }else{
-            res.send("Error")
+            res.json({status: "Error"})
         }
     }
 
