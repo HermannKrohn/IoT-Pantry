@@ -3,6 +3,7 @@ const userRoutes = require('./routes/userRoutes.js')
 const hardwareRoutes = require('./routes/hardwareRoutes.js')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const secrets = require('./JWTSecret.js')
 
 
 const app = express()
@@ -17,6 +18,6 @@ app.use('/user', userRoutes)
 app.use('/hardware', hardwareRoutes)
 
 
-app.listen(3001, () => {
-    console.log("Listening on http://localhost:3001")
+app.listen(3001, `${secrets.ipAddress}`,() => {
+    console.log(`Listening on http://${secrets.ipAddress}:3001`)
 })

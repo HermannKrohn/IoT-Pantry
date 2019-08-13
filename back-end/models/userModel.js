@@ -1,5 +1,5 @@
 const connection = require('../DB/knexConnection')
-const JWTSecret = require('../JWTSecret')
+const secrets = require('../JWTSecret')
 const jwt = require('jwt-simple')
 const bcrypt = require('bcrypt')
 
@@ -23,7 +23,7 @@ class userModel {
     }
 
     static generateJWT(id){
-        return jwt.encode({id: id}, JWTSecret)
+        return jwt.encode({id: id}, secrets.JWTsecret)
     }
 
     static async authenticatePassword(password, hash){

@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 let formSubmit = (event) => {
     event.preventDefault()
-    fetch("http://localhost:3001/user/login", {
+    fetch("http://10.185.6.222:3001/user/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

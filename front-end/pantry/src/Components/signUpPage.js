@@ -2,7 +2,7 @@ import React from 'react'
 
 let formSubmit = (event) => {
     event.preventDefault();
-    fetch('http://localhost:3001/user/new-user',{
+    fetch('http://10.185.6.222:3001/user/new-user',{
         method: "POST",
         headers:{
             "Content-Type": "application/json"
