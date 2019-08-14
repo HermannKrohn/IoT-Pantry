@@ -10,7 +10,7 @@ const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use(cors({ origin: 'http://localhost:3000', credentials: true}))
+app.use(cors({ origin: '*', credentials: true}))//origin should be limited to localhost:3000 and the ip addresses of the node mcu boards
 
 
 
