@@ -1,14 +1,14 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define SS_PIN 2 //d4
-#define RST_PIN 4//d2
+#define SS_PIN 2 
+#define RST_PIN 0
 
 MFRC522 mfrc522(SS_PIN, RST_PIN); //Init reader
 MFRC522::MIFARE_Key key;
 
-int block = ;//This is the block number the program will read/write. DO NOT WRITE INTO 'sector trailer' BLOCK SINCE IT CAN MAKE THE BLOCK UNUSABLE.
-byte writeContent[16] = {""}; //16 characters
+int block = 12;//This is the block number the program will read/write. DO NOT WRITE INTO 'sector trailer' BLOCK SINCE IT CAN MAKE THE BLOCK UNUSABLE.
+byte writeContent[16] = {"Advil"}; //16 characters
 
 void setup() {
   // put your setup code here, to run once:
@@ -34,6 +34,8 @@ void loop() {
   }
 
   writeBlock(block, writeContent);
+  Serial.println("DONE. REMOVE CARD");
+  delay(5000);
 }
 
 void writeBlock(int blockNumber, byte writeContent[]){
