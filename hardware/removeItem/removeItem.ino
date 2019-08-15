@@ -60,11 +60,6 @@ void loop() {
     }
     UIDString += String(mfrc522.uid.uidByte[i], HEX);
   }
-  Serial.println("Done reading");
-//  // Halt PICC
-//  mfrc522.PICC_HaltA();
-//  // Stop encryption on PCD
-//  mfrc522.PCD_StopCrypto1();
   
   if(wifiMulti.run() == WL_CONNECTED){
     StaticJsonDocument<200> doc;
