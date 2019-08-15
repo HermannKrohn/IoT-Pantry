@@ -84,9 +84,6 @@ void loop() {
     }
     UIDString += String(mfrc522.uid.uidByte[i], HEX);
   }
-
-//  String category = categoryBlock.as<String>();
-//  String itemName = itemNameBlock.ToString();
   
   if(wifiMulti.run() == WL_CONNECTED){
     //Create JSON object to send as body

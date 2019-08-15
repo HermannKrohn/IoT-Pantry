@@ -1,7 +1,15 @@
+#include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
+#include <SPI.h>
+#include <MFRC522.h>
 #include <ESP8266HTTPClient.h>
-#include <ArduinoJson.h>
+
+#define SS_PIN 2
+#define RST_PIN 0
+
+MFRC522 mfrc522(SS_PIN, RST_PIN); //Init reader
+MFRC522::MIFARE_Key key;
 
 ESP8266WiFiMulti wifiMulti;
 HTTPClient http;
@@ -9,6 +17,9 @@ HTTPClient http;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
+
+  SPI.begin();
+  mfrc522.PCD_Init();
 
   WiFi.mode(WIFI_STA);
   wifiMulti.addAP("WeWork", "P@ssw0rd");
@@ -29,16 +40,41 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println("STARTING LOOP IN VOID LOOP");
+  if(!mfrc522.PICC_IsNewCardPresent()){
+//    Serial.println("Returning 1");
+    return;
+  }
+
+  if(!mfrc522.PICC_ReadCardSerial()){
+//    Serial.println("Returning 2");
+    return;
+  }
+
+  String UIDString = "";
+  for (byte i=0; i < mfrc522.uid.size; i++)
+  {
+    if (mfrc522.uid.uidByte[i] < 0x10){
+      UIDString += " 0";
+    }else{
+      UIDString += " ";
+    }
+    UIDString += String(mfrc522.uid.uidByte[i], HEX);
+  }
+  Serial.println("Done reading");
+//  // Halt PICC
+//  mfrc522.PICC_HaltA();
+//  // Stop encryption on PCD
+//  mfrc522.PCD_StopCrypto1();
+  
   if(wifiMulti.run() == WL_CONNECTED){
     StaticJsonDocument<200> doc;
     doc["pin"] = 4111;
     doc["userID"] = 28;
-    doc["UID"] = "1C 1C 1C 1C";
+    doc["UID"] = UIDString;
     String jsonString;
     jsonString = doc.as<String>();
 
-    http.begin("http://10.185.2.218:3001/hardware/remove-item");
+    http.begin("http://10.185.7.38:3001/hardware/remove-item");
     http.addHeader("Content-Type", "application/json");
     int httpCode = http.POST(jsonString);
     String payload = http.getString();
