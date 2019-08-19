@@ -59,7 +59,7 @@ textarea:-ms-input-placeholder { color: #fff;}
   background: #fff;
   padding: 15px 80px;
   border-radius: 5px;
-  box-shadow: 5px 55px 50px -20px rgba(85,172,238 ,0.5); 
+  box-shadow: 5px 5px 80px -20px rgba(85,172,238 ,0.5); 
   min-height: 1vh;
 }
 
@@ -76,6 +76,10 @@ ul{
 /* .glyphicon-log-in{
   font-size: 40px;
 } */
+
+.pantryBody{
+  margin: 5vh;
+}
 
 .nav-bar{
   display: flex;
