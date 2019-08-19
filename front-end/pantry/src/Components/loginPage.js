@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../css/loginPage.css'
+import NavBar from './navBar'
 
 let handleSignUp = (event) => {
     event.preventDefault()
@@ -51,14 +52,16 @@ let mapDispatchToProps = {
     }
 }
 
+
 function loginPage(props){
     return(
         <div className="page">
+            <NavBar />
             <div className="pageBackground">
                 <div className="form-wrapper">
                     <form className="form" onSubmit={(e) => formSubmit(e, props)}>
                         <div className="form-logo">
-                            <i className="material-icons">landscape</i>
+                            <i className="material-icons">fastfood</i>
                         </div>
 
                         <div className="form-title p-b-34 p-t-27">

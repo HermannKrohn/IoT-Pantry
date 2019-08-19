@@ -1,6 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+let handleLogIn = (event) => {
+    event.preventDefault()
+    //now redirect to signup page with history.push
+}
+
 let formSubmit = (event, props) => {
     event.preventDefault();
     fetch('http://10.0.0.66:3001/user/new-user',{
@@ -44,7 +49,7 @@ function signUp(props){
                 <div className="form-wrapper">
                     <form className="form" onSubmit={(e) => formSubmit(e, props)}>
                         <div className="form-logo">
-                            <i className="material-icons">landscape</i>
+                            <i className="material-icons">fastfood</i>
                         </div>
 
                         <div className="form-title p-b-34 p-t-27">
@@ -79,6 +84,12 @@ function signUp(props){
                             <button className="btn" type="submit">
                                 Sign up
                             </button>
+                        </div>
+
+                        <div className="text-center p-t-90">
+                            <a className="ref" onClick={(e) => handleLogIn(e)}>
+                                Already have an account? Log in
+                            </a>
                         </div>
                     </form>
                 </div>
