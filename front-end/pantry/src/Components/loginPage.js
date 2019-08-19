@@ -1,8 +1,14 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import '../css/loginPage.css'
 
-let formSubmit = (event) => {
+let handleSignUp = (event) => {
+    event.preventDefault()
+    //now redirect to signup page with history.push
+}
+
+let formSubmit = (event, props) => {
     event.preventDefault()
     console.log("sending")
     console.log(event.target['passwordField'].value)
@@ -23,6 +29,7 @@ let formSubmit = (event) => {
             //Clear local storage and then set local storage contain new token. After that, redirect to pantry
             localStorage.removeItem('token')
             localStorage.setItem('token', json.token)
+            props.initUser(json.username)
             return(
                 <Route
                     render={() => {
@@ -41,19 +48,25 @@ let formSubmit = (event) => {
     })
 }
 
-function loginPage(){
+let mapDispatchToProps = {
+    initUser: username => {
+        return {payload: username, type: 'INIT_USER'}
+    }
+}
+
+function loginPage(props){
     return(
         <div className="page">
             <div className="pageBackground">
                 <div className="form-wrapper">
-                    <form className="login-form" onSubmit={(e) => formSubmit(e)}>
-                        <span className="login-form-logo">
+                    <form className="form" onSubmit={(e) => formSubmit(e, props)}>
+                        <div className="form-logo">
                             <i className="material-icons">landscape</i>
-                        </span>
+                        </div>
 
-                        <span className="login-form-title p-b-34 p-t-27">
+                        <div className="form-title p-b-34 p-t-27">
 						    Log in
-					    </span>
+					    </div>
 
                         <div className="inputDiv">
                             <input className="input" type="text" name="usernameField" placeholder="Username"></input>
@@ -64,13 +77,13 @@ function loginPage(){
 					    </div>
 
                         <div className="buttonDiv">
-                            <button className="loginButton" type="submit">
+                            <button className="btn" type="submit">
                                 Login
                             </button>
                         </div>
 
                         <div className="text-center p-t-90">
-                            <a className="sign-up-ref" href="#">
+                            <a className="ref" onClick={(e) => handleSignUp(e)}>
                                 Don't have an account? Sign up
                             </a>
                         </div>
@@ -94,4 +107,5 @@ function loginPage(){
     )
 }
 
-export default loginPage
+export default connect(null, mapDispatchToProps)(loginPage)
+

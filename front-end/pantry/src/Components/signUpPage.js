@@ -2,7 +2,7 @@ import React from 'react'
 
 let formSubmit = (event) => {
     event.preventDefault();
-    fetch('http://10.185.6.222:3001/user/new-user',{
+    fetch('http://10.0.0.66:3001/user/new-user',{
         method: "POST",
         headers:{
             "Content-Type": "application/json"
@@ -32,35 +32,80 @@ let formSubmit = (event) => {
 
 function signUp(){
     return(
-        <div>
-            <form onSubmit={(e) => formSubmit(e)}>
-                <div>
-                    <label>First Name:</label>
-                    <input name="firstNameField" type="text" />
+        <div className="page">
+            <div className="pageBackground">
+                <div className="form-wrapper">
+                    <form className="form" onSubmit={(e) => formSubmit(e)}>
+                        <div className="form-logo">
+                            <i className="material-icons">landscape</i>
+                        </div>
+
+                        <div className="form-title p-b-34 p-t-27">
+						    Sign up
+					    </div>
+
+                        <div className="inputDiv">
+                            <input className="input" type="text" name="firstNameField" placeholder="First Name"></input>
+					    </div>
+
+                        <div className="inputDiv">
+                            <input className="input" type="text" name="lastNameField" placeholder="Last Name"></input>
+					    </div>
+
+                        <div className="inputDiv">
+                            <input className="input" type="text" name="usernameField" placeholder="Username"></input>
+					    </div>
+
+                        <div className="inputDiv">
+                            <input className="input" type="text" name="emailField" placeholder="Email"></input>
+					    </div>
+
+                        <div className="inputDiv">
+                            <input className="input" type="text" name="passwordField" placeholder="Password"></input>
+					    </div>
+
+                        <div className="inputDiv">
+                            <input className="input" type="text" name="pinField" placeholder="4 Digit Pin"></input>
+					    </div>
+
+                        <div className="buttonDiv">
+                            <button className="btn" type="submit">
+                                Sign up
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <label>Last Name:</label>
-                    <input name="lastNameField" type="text" />
-                </div>
-                <div>
-                    <label>Username:</label>
-                    <input name="usernameField" type="text" />
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input name="emailField" type="text" />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input name="passwordField" type="text" />
-                </div>
-                <div>
-                    <label>4-digit Pin:</label>
-                    <input name="pinField" type="number" />
-                </div>
-                <button type="submit">Sign up</button>
-            </form>
+            </div>
         </div>
+        // <div>
+        //     <form onSubmit={(e) => formSubmit(e)}>
+        //         <div>
+        //             <label>First Name:</label>
+        //             <input name="firstNameField" type="text" />
+        //         </div>
+        //         <div>
+        //             <label>Last Name:</label>
+        //             <input name="lastNameField" type="text" />
+        //         </div>
+        //         <div>
+        //             <label>Username:</label>
+        //             <input name="usernameField" type="text" />
+        //         </div>
+        //         <div>
+        //             <label>Email:</label>
+        //             <input name="emailField" type="text" />
+        //         </div>
+        //         <div>
+        //             <label>Password:</label>
+        //             <input name="passwordField" type="text" />
+        //         </div>
+        //         <div>
+        //             <label>4-digit Pin:</label>
+        //             <input name="pinField" type="number" />
+        //         </div>
+        //         <button type="submit">Sign up</button>
+        //     </form>
+        // </div>
     )
 }
 

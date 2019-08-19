@@ -59,7 +59,7 @@ class userController {
             }
             userModel.createUser(newUser).then((IDArray) => {
                 let token = userModel.generateJWT(IDArray[0])
-                res.json({status: "Success", token: token})
+                res.json({status: "Success", token: token, username: newUser.userName})
             }).catch((err) => {
                 res.json({status: "Error", errors: {"InternalServerError": "An Error occured. Try again."} })
                 next(err)
@@ -74,7 +74,7 @@ class userController {
         let userArr = await userModel.findByUsername(username)
         if(await userModel.checkCrendentials(password, userArr)){
             let token = userModel.generateJWT(userArr[0].id)
-            res.json({ status: "Success", token: token})
+            res.json({ status: "Success", token: token, username: username})
         }else{
             res.json({ status: "Error", errors: {"unableToAuthenticate": "Username or password incorrect. Try again."} });
         }
