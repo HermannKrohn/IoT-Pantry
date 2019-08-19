@@ -1,6 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-let formSubmit = (event) => {
+let formSubmit = (event, props) => {
     event.preventDefault();
     fetch('http://10.0.0.66:3001/user/new-user',{
         method: "POST",
@@ -22,20 +23,26 @@ let formSubmit = (event) => {
             //Clear token from local storage and set local storage ti contain new token. Then redirect to index
             localStorage.removeItem('token')
             localStorage.setItem('token', json.token)
+            props.initUser(json.username)
         }else{
             //clear local storage token. Update store with errors. Then re-render sign-up page
             localStorage.removeItem('token')
-            console.log(json.errors)
         }
     })
 }
 
-function signUp(){
+let mapDispatchToProps = {
+    initUser: username => {
+        return {payload: username, type: 'INIT_USER'}
+    }
+}
+
+function signUp(props){
     return(
         <div className="page">
             <div className="pageBackground">
                 <div className="form-wrapper">
-                    <form className="form" onSubmit={(e) => formSubmit(e)}>
+                    <form className="form" onSubmit={(e) => formSubmit(e, props)}>
                         <div className="form-logo">
                             <i className="material-icons">landscape</i>
                         </div>
@@ -109,4 +116,4 @@ function signUp(){
     )
 }
 
-export default signUp
+export default connect(null, mapDispatchToProps)(signUp)//change null to errors array in order to flash error messages

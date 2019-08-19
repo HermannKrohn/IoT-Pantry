@@ -10,9 +10,6 @@ let handleSignUp = (event) => {
 
 let formSubmit = (event, props) => {
     event.preventDefault()
-    console.log("sending")
-    console.log(event.target['passwordField'].value)
-    console.log(event.target['usernameField'].value)
     fetch("http://10.0.0.66:3001/user/login", {
         method: "POST",
         headers: {
@@ -107,5 +104,5 @@ function loginPage(props){
     )
 }
 
-export default connect(null, mapDispatchToProps)(loginPage)
+export default connect(null, mapDispatchToProps)(loginPage)//change null to errors array in order to flash error messages
 

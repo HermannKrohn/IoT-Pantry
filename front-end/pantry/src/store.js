@@ -6,7 +6,8 @@ const initState = {
     pantryArr: [],
     categoryArr: [],
     categoryItemArr: [],
-    displayPantryArr: [],
+    categoryTerms: [],
+    errorsArr: [],
     username: ''
 }
 
