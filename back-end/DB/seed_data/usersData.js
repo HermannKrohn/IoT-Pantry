@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt')
+
 let usersData = [
     {
         firstName: "Jack",
@@ -16,9 +18,9 @@ let usersData = [
         password_digest: "123"
     },
     {
-        firstName: "Juan",
-        lastName: "Carlos",
-        username: "jc123",
+        firstName: "Rey",
+        lastName: "Rey",
+        username: "ReyRey",
         email: "jc@test.com",
         hardwarePin: 4111,
         password_digest: "123"

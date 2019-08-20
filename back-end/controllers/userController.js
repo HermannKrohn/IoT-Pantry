@@ -1,5 +1,6 @@
 const userModel = require('../models/userModel')
 const validator = require('validator')
+const pantryModel = require('../models/pantryItemModel')
 const jwt = require('jwt-simple')
 
 class userController {
@@ -39,9 +40,11 @@ class userController {
         res.send("sign up page")
     }
 
-    static userPantry = (req, res) => {
-        console.log(req.params)
-        res.send("Pantry")
+    static userPantry = async (req, res) => {
+        //get user id from JWT token
+        let idHash = await userModel.decodeJWT(req.body.JWT)
+        let outputArr = await pantryModel.combineTables(idHash.id)
+        res.json(outputArr)
     }
 
     static createUser = async (req, res, next) => {

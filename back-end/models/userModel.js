@@ -30,6 +30,10 @@ class userModel {
         return await bcrypt.compare(password, hash)
     }
 
+    static async decodeJWT(token){
+        return await jwt.decode(token, secrets.JWTsecret)
+    }
+
     static async checkCrendentials(password, userArr){// send password and password digest and find user in the controller instead
         if(userArr.length > 0 && await this.authenticatePassword(password, userArr[0].password_digest)){
             return true

@@ -5,7 +5,7 @@ const userController = require('../controllers/userController')
 router
     .get('/login', userController.loginPage)
     .get('/sign-up', userController.signUpPage)
-    .get('/:username/pantry', userController.userPantry)
+    .post('/:username/pantry', userController.userPantry)
     .post('/new-user', userController.createUser)
     .post('/login', userController.authenticate)
 

@@ -26,6 +26,14 @@ class pantryItemModel {
                 .leftOuterJoin('pantryItems', 'category_items.itemID', 'pantryItems.id')    
     }
 
+    static async combineTables(userID){
+        return connection.from('users')
+                .select('categories.*', 'pantryItems.*', 'category_items.categoryID as catID').where({userID: userID})
+                .leftOuterJoin('categories', 'users.id', 'categories.userID')
+                .leftOuterJoin('category_items', 'categories.id', 'category_items.categoryID')
+                .leftOuterJoin('pantryItems', 'category_items.itemID', 'pantryItems.id') 
+    }
+
     static async delete(id){
         return connection('pantryItems').where('id', id).del()
     }

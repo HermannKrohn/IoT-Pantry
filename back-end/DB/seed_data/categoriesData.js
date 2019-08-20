@@ -23,7 +23,7 @@ let categoriesData = [
     },
     {
         category: "Snack",
-        userID: getID("jc123")
+        userID: getID("ReyRey")
     }
 ]
 
