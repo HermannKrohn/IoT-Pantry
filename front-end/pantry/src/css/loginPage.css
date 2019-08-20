@@ -119,6 +119,30 @@ ul{
   
 }
 
+.logout-text{
+  display: none;
+  cursor: pointer;
+  font-size: 23px;
+}
+
+.glyphicon-log-in{
+  display: flex;
+  font-size: 20px;
+  padding-bottom: 7px;
+  cursor: pointer;
+}
+
+.logout-li:hover .logout-text{
+  display: flex;
+  cursor: pointer;
+}
+
+.logout-li:hover .glyphicon-log-in{
+  display: none;
+  cursor: pointer;
+  padding: 0;
+}
+
 /* .search-navbar{
   margin-left: auto;
   max-height: 30px;
@@ -197,6 +221,8 @@ ul{
     text-align: center;
     text-transform: uppercase;
     display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .inputDiv{
@@ -215,7 +241,7 @@ ul{
     display: block;
     width: 100%;
     height: 45px;
-    background: transparent;
+    background: rgba(200, 200, 200, 0.1);
     border: transparent;
     padding: 0px;
     padding-left: 15px;
@@ -286,14 +312,6 @@ ul{
   .text-center{
     text-align: center;
     margin-top: 5%;
-  }
-
-  .p-b-34{
-      padding-bottom: 34px;
-  }
-  
-  .p-t-27{
-      padding-top: 27px;
   }
 
   @media (max-width: 576px) {

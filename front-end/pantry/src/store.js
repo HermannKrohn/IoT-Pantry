@@ -42,6 +42,9 @@ const reducer = (state, action) => {
                 filterTerms: action.payload
             }
             break
+        case 'CLEAR_STORE':
+            state = initState
+            break
     }
     // switch(action.type){
     //     case 'CREATE_POST':

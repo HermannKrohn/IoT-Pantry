@@ -42,7 +42,7 @@ class userController {
 
     static userPantry = async (req, res) => {
         //get user id from JWT token
-        let idHash = await userModel.decodeJWT(req.body.JWT)
+        let idHash = await userModel.decodeJWT(req.headers.authorization)
         let outputArr = await pantryModel.combineTables(idHash.id)
         res.json(outputArr)
     }
@@ -81,6 +81,12 @@ class userController {
         }else{
             res.json({ status: "Error", errors: {"unableToAuthenticate": "Username or password incorrect. Try again."} });
         }
+    }
+
+    static getUsername = async (req, res) => {
+        let idHash = await userModel.decodeJWT(req.headers.authorization)
+        let userHash = await userModel.findByID(idHash.id)
+        res.json({status: "Success", username: userHash.userName})
     }
 }
 

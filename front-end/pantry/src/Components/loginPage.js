@@ -6,7 +6,7 @@ import history from '../history'
 
 let handleSignUp = (event) => {
     event.preventDefault()
-    //now redirect to signup page with history.push
+    history.push('/sign-up')
 }
 
 let formSubmit = (event, props) => {
@@ -55,7 +55,7 @@ function loginPage(props){
                             <i className="material-icons">fastfood</i>
                         </div>
 
-                        <div className="form-title p-b-34 p-t-27">
+                        <div className="form-title">
 						    Log in
 					    </div>
 

@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import history from '../history'
 
 let handleLogIn = (event) => {
     event.preventDefault()
-    //now redirect to signup page with history.push
+    history.push('/login')
 }
 
 let formSubmit = (event, props) => {
@@ -52,7 +53,7 @@ function signUp(props){
                             <i className="material-icons">fastfood</i>
                         </div>
 
-                        <div className="form-title p-b-34 p-t-27">
+                        <div className="form-title">
 						    Sign up
 					    </div>
 

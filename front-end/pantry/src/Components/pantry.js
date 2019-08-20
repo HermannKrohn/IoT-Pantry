@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import NavBar from './navBar'
 import { Card } from 'semantic-ui-react'
 import ItemCard from './itemCard'
+import history from '../history'
 
 let mapStateToProps = state => {
     return {
@@ -42,20 +43,53 @@ let itemsToDisplay = props => {
 
 function Pantry(props){
     useEffect(() => {
-        fetch(`http://10.185.3.218:3001/user/${props.username}/pantry`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                JWT: localStorage.getItem('token')
+        if(props.username.length > 0 && localStorage.getItem('token') !== null){
+            //have username and token...just fetch
+            fetch(`http://10.185.3.218:3001/user/${props.username}/pantry`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('token')
+                }
+            }).then(res => {
+                return res.json()
+            }).then(json => {
+                props.updateAllItems(json)
             })
-        }).then(res => {
-            return res.json()
-        }).then(json => {
-            props.updateAllItems(json)
-        })
-    }, [])
+        }else if(props.username.length < 1 && localStorage.getItem('token') !== null){
+            //have token but no username. First fetch username then fetch pantry
+            fetch('http://10.185.3.218:3001/user/get-username',{
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": localStorage.getItem('token')
+                }
+            }).then(res => {
+                return res.json()
+            }).then(json => {
+                if(json.status === "Success"){
+                    //fetch like first if statement
+                    fetch(`http://10.185.3.218:3001/user/${json.username}/pantry`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": localStorage.getItem('token')
+                        }
+                    }).then(stateRes => {
+                        return stateRes.json()
+                    }).then(stateJson => {
+                        props.updateAllItems(stateJson)
+                    })
+                }else{
+                    localStorage.removeItem('token')
+                    history.push('/login')
+                }
+            })
+        }else{
+            //do not have a username or token. Redirect to login
+            history.push('/login')
+        }
+    }, [props.username])
 
     let displayItems = []
     displayItems = itemsToDisplay(props)
