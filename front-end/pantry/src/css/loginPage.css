@@ -164,7 +164,7 @@ ul{
     padding: 55px 55px 37px 55px;
     max-height: 98vh;
     margin: 1vh;
-
+    border: none;
     background: #9152f8;
     background: linear-gradient(to top, #7579ff, #b224ef);
  } 
@@ -240,7 +240,7 @@ ul{
     min-width: 120px;
     height: 50px;
     border-radius: 25px;
-  
+    border: none;
     background: lightblue;
     background: linear-gradient(to bottom, #7579ff, #b224ef); 
     position: relative;

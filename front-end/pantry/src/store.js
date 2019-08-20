@@ -30,6 +30,18 @@ const reducer = (state, action) => {
                 searchTerm: action.payload
             }
             break
+        case 'APPEND_TO_FILTERS':
+            state = {
+                ...state,
+                filterTerms: action.payload
+            }
+            break
+        case 'REMOVE_FROM_FILTERS':
+            state = {
+                ...state,
+                filterTerms: action.payload
+            }
+            break
     }
     // switch(action.type){
     //     case 'CREATE_POST':
