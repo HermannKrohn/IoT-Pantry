@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../css/loginPage.css'
+import history from '../history'
 
 let handleSignUp = (event) => {
     event.preventDefault()
@@ -10,7 +11,7 @@ let handleSignUp = (event) => {
 
 let formSubmit = (event, props) => {
     event.preventDefault()
-    fetch("http://10.0.0.66:3001/user/login", {
+    fetch("http://10.185.3.218:3001/user/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -28,15 +29,7 @@ let formSubmit = (event, props) => {
             localStorage.setItem('token', json.token)
             props.initUser(json.username)
             return(
-                <Route
-                    render={() => {
-                        return(
-                            <Redirect to={{
-                                pathname: '/sign-up'
-                            }}/>
-                        )
-                    }}
-                />
+                history.push(`/${json.username}/pantry`)
             )
         }else{
             //clear local storage and update state with array of error messages. Then re-render login page

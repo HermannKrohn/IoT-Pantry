@@ -3,10 +3,9 @@ import history from './history'
 import ReduxThunk from 'redux-thunk'
 
 const initState = {
-    pantryArr: [],
-    categoryArr: [],
-    categoryItemArr: [],
+    allItemsArr: [],
     filterTerms: [],
+    searchTerm: '',
     errorsArr: [],
     username: ''
 }
@@ -18,6 +17,19 @@ const reducer = (state, action) => {
                 ...state,
                 username: action.payload
             }
+            break
+        case 'UPDATE_ALL_ITEMS_ARR':
+            state = {
+                ...state,
+                allItemsArr: action.payload
+            }
+            break
+        case 'UPDATE_SEARCH_TERM':
+            state = {
+                ...state,
+                searchTerm: action.payload
+            }
+            break
     }
     // switch(action.type){
     //     case 'CREATE_POST':

@@ -8,7 +8,7 @@ let handleLogIn = (event) => {
 
 let formSubmit = (event, props) => {
     event.preventDefault();
-    fetch('http://10.0.0.66:3001/user/new-user',{
+    fetch('http://10.185.3.218:3001/user/new-user',{
         method: "POST",
         headers:{
             "Content-Type": "application/json"
