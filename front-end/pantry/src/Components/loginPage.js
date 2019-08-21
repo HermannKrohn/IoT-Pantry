@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../css/loginPage.css'
 import history from '../history'
-import socketIO from 'socket.io-client'
+import { initConnection, joinRoom, initListeners } from '../SocketConnections'
 
 let handleSignUp = (event) => {
     event.preventDefault()
@@ -16,6 +16,9 @@ let mapDispatchToProps = {
     },
     newItem: itemHash => {
         return {payload: itemHash, type: 'SOCKET_PREPEND_ITEM'}
+    },
+    removeItem: UIDHash  => {
+        return {payload: UIDHash, type: 'SOCKET_REMOVE_ITEM'}
     }
 }
 
@@ -38,13 +41,23 @@ let formSubmit = (event, props) => {
             localStorage.removeItem('token')
             localStorage.setItem('token', json.token)
             props.initUser(json.username)
-            const io = socketIO('http://10.185.0.162:3001')
-            io.emit('join-room', {
-                JWT: localStorage.getItem('token')
-            })
-            io.on('new-item', item => {
-                props.newItem(item)
-            })
+            //move io stuff to its own file and reuse for sign-up form and reconnection
+            // const io = socketIO('http://10.185.0.162:3001')
+            // io.emit('join-room', {
+            //     JWT: localStorage.getItem('token')
+            // })
+            // io.on('new-item', item => {
+            //     props.newItem(item)
+            // })
+            // io.on('remove-item', UIDHash => {
+            //     props.removeItem(UIDHash)
+            // })
+            // io.on('disconnect', () => {
+            //     window.location.reload()
+            // })
+            initConnection()
+            joinRoom()
+            initListeners()
             history.push(`/${json.username}/pantry`)
         }else{
             //clear local storage and update state with array of error messages. Then re-render login page

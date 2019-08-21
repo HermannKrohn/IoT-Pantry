@@ -5,6 +5,7 @@ import NavBar from './navBar'
 import { Card } from 'semantic-ui-react'
 import ItemCard from './itemCard'
 import history from '../history'
+import { initConnection, joinRoom, initListeners } from '../SocketConnections'
 
 let mapStateToProps = state => {
     return {
@@ -79,6 +80,9 @@ function Pantry(props){
                         return stateRes.json()
                     }).then(stateJson => {
                         props.updateAllItems(stateJson)
+                        initConnection()
+                        joinRoom()
+                        initListeners()
                     })
                 }else{
                     localStorage.removeItem('token')

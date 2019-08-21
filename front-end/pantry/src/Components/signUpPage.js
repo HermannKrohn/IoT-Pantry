@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import history from '../history'
+import { initConnection, joinRoom, initListeners } from '../SocketConnections'
 
 let handleLogIn = (event) => {
     event.preventDefault()
@@ -30,6 +31,9 @@ let formSubmit = (event, props) => {
             localStorage.removeItem('token')
             localStorage.setItem('token', json.token)
             props.initUser(json.username)
+            initConnection()
+            joinRoom()
+            initListeners()
             history.push(`/${json.username}/pantry`)
         }else{
             //clear local storage token. Update store with errors. Then re-render sign-up page

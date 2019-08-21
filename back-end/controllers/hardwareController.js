@@ -16,8 +16,9 @@ module.exports = io => {
                 //Insert socket emit here. The socket emission should update users front end view with new item
                 io.in(`room-${inputs.userID}`).emit('new-item', {
                     itemName: inputs.itemName,
-                    category: inputs.category
-                });
+                    category: inputs.category,
+                    UID: inputs.UID
+                })
                 res.json({ status: "Success" })
             } else {
                 res.json({ status: "Error" })
@@ -31,6 +32,9 @@ module.exports = io => {
                 if (itemToRemoveArr.length > 0) {
                     pantryModel.delete(itemToRemoveArr[0].id)
                     categoryModel.delete(itemToRemoveArr[0].catID)
+                    io.in(`room-${inputs.userID}`).emit('remove-item', {
+                        UID: inputs.UID
+                    })
                     res.json({ status: "Success" })
                 } else {
                     res.json({ status: "Error" })

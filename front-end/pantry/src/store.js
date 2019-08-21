@@ -51,6 +51,16 @@ const reducer = (state, action) => {
                 allItemsArr: [action.payload, ...state.allItemsArr]
             }
             break
+        case 'SOCKET_REMOVE_ITEM':
+            //filter with UID then update state
+            let outputArr = state.allItemsArr.filter(currObj => {
+                return currObj.UID !== action.payload.UID
+            })
+            state = {
+                ...state,
+                allItemsArr: outputArr
+            }
+            break
     }
     // switch(action.type){
     //     case 'CREATE_POST':
