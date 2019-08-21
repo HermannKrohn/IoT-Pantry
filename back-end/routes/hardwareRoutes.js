@@ -1,9 +1,11 @@
-const express = require('express')
-const router = express.Router()
-const hardwareController = require('../controllers/hardwareController.js')
 
-router
-    .post('/new-item', hardwareController.newItem)
-    .post('/remove-item', hardwareController.removeItem)
+module.exports =  io => {
+    const express = require('express')
+    const router = express.Router()
+    const hardwareController = require('../controllers/hardwareController.js')(io)
 
-module.exports = router
+    router
+        .post('/new-item', hardwareController.newItem)
+        .post('/remove-item', hardwareController.removeItem)
+    return router
+}

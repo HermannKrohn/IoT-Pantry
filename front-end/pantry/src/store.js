@@ -45,6 +45,12 @@ const reducer = (state, action) => {
         case 'CLEAR_STORE':
             state = initState
             break
+        case 'SOCKET_PREPEND_ITEM':
+            state = {
+                ...state,
+                allItemsArr: [action.payload, ...state.allItemsArr]
+            }
+            break
     }
     // switch(action.type){
     //     case 'CREATE_POST':

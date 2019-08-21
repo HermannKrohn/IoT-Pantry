@@ -3,10 +3,20 @@ import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../css/loginPage.css'
 import history from '../history'
+import socketIO from 'socket.io-client'
 
 let handleSignUp = (event) => {
     event.preventDefault()
     history.push('/sign-up')
+}
+
+let mapDispatchToProps = {
+    initUser: username => {
+        return {payload: username, type: 'INIT_USER'}
+    },
+    newItem: itemHash => {
+        return {payload: itemHash, type: 'SOCKET_PREPEND_ITEM'}
+    }
 }
 
 let formSubmit = (event, props) => {
@@ -28,6 +38,13 @@ let formSubmit = (event, props) => {
             localStorage.removeItem('token')
             localStorage.setItem('token', json.token)
             props.initUser(json.username)
+            const io = socketIO('http://10.185.0.162:3001')
+            io.emit('join-room', {
+                JWT: localStorage.getItem('token')
+            })
+            io.on('new-item', item => {
+                props.newItem(item)
+            })
             history.push(`/${json.username}/pantry`)
         }else{
             //clear local storage and update state with array of error messages. Then re-render login page
@@ -35,13 +52,6 @@ let formSubmit = (event, props) => {
         }
     })
 }
-
-let mapDispatchToProps = {
-    initUser: username => {
-        return {payload: username, type: 'INIT_USER'}
-    }
-}
-
 
 function loginPage(props){
     return(
