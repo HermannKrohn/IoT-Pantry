@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SearchBar from './SearchBar'
 import { connect } from 'react-redux'
 import history from '../history'
@@ -41,8 +41,6 @@ let handleChange = (e, props) => {
 }
 
 function NavBar(props){
-    let [ state, updateState] = useState({"vegetable": true, "fruit": true, "grain": true, "protein": true, "dairy": true})
-
     return(
         <ul className="nav-bar" role="navigation">
                 <li className="vegetable-li">

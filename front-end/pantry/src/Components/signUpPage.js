@@ -9,7 +9,7 @@ let handleLogIn = (event) => {
 
 let formSubmit = (event, props) => {
     event.preventDefault();
-    fetch('http://10.185.3.218:3001/user/new-user',{
+    fetch('http://10.185.0.162:3001/user/new-user',{
         method: "POST",
         headers:{
             "Content-Type": "application/json"
@@ -30,6 +30,7 @@ let formSubmit = (event, props) => {
             localStorage.removeItem('token')
             localStorage.setItem('token', json.token)
             props.initUser(json.username)
+            history.push(`/${json.username}/pantry`)
         }else{
             //clear local storage token. Update store with errors. Then re-render sign-up page
             localStorage.removeItem('token')

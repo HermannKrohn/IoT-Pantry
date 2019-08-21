@@ -314,6 +314,45 @@ ul{
     margin-top: 5%;
   }
 
+  .homepage-main-text{
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .homepage-sub-text{
+    text-align: center;
+  }
+
+  .homepage-button-div{
+    display: flex;
+    justify-content: center;
+  }
+
+  .homepage-btn{
+    margin-left: 2%;
+    margin-right: 2%;
+
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.2;
+    padding: 0 20px;
+    min-width: 120px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .login-btn{
+    background: green;
+  }
+
+  .sign-up-btn{
+    background: red;
+  }
+
   @media (max-width: 576px) {
     .form-wrapper {
       padding: 55px 15px 37px 15px;

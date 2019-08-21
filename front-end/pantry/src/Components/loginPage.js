@@ -11,7 +11,7 @@ let handleSignUp = (event) => {
 
 let formSubmit = (event, props) => {
     event.preventDefault()
-    fetch("http://10.185.3.218:3001/user/login", {
+    fetch("http://10.185.0.162:3001/user/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -28,9 +28,7 @@ let formSubmit = (event, props) => {
             localStorage.removeItem('token')
             localStorage.setItem('token', json.token)
             props.initUser(json.username)
-            return(
-                history.push(`/${json.username}/pantry`)
-            )
+            history.push(`/${json.username}/pantry`)
         }else{
             //clear local storage and update state with array of error messages. Then re-render login page
             localStorage.removeItem('token')
