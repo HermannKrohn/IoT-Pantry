@@ -188,9 +188,10 @@ ul{
     padding: 55px 55px 37px 55px;
     max-height: 98vh;
     margin: 1vh;
-    border: none;
-    background: #9152f8;
-    background: linear-gradient(to top, #7579ff, #b224ef);
+    /* border: none; */
+    background: #0000004b;
+    border: 1px solid white;
+    /* background: linear-gradient(to top, #7579ff, #b224ef); */
  } 
 
     .form {
@@ -241,8 +242,8 @@ ul{
     display: block;
     width: 100%;
     height: 45px;
-    background: rgba(200, 200, 200, 0.1);
-    border: transparent;
+    background: rgba(200, 200, 200, 0.01);
+    border: 1px solid white;
     padding: 0px;
     padding-left: 15px;
   }
@@ -257,7 +258,7 @@ ul{
   .btn{
     font-family: Poppins-Medium;
     font-size: 16px;
-    color: #555555;
+    color: white;
     line-height: 1.2;
     display: flex;
     justify-content: center;
@@ -265,10 +266,10 @@ ul{
     padding: 0 20px;
     min-width: 120px;
     height: 50px;
-    border-radius: 25px;
-    border: none;
-    background: lightblue;
-    background: linear-gradient(to bottom, #7579ff, #b224ef); 
+    border-radius: 5px;
+    border: 1px solid white;
+    /* background: lightblue; */
+    /* background: linear-gradient(to bottom, #7579ff, #b224ef);  */
     position: relative;
     z-index: 1;
     transition: all 0.4s;
@@ -281,8 +282,8 @@ ul{
     z-index: -1;
     width: 100%;
     height: 100%;
-    border-radius: 25px;
-    background-color: #fff;
+    border-radius: 5px;
+    background-color: #0000002e;
     top: 0;
     left: 0;
     opacity: 1;
@@ -290,7 +291,8 @@ ul{
   }
 
   .btn:hover{
-    color: #fff;
+    color: white;
+    background: #94949411;
   }
 
   .btn:hover:before{
@@ -314,13 +316,24 @@ ul{
     margin-top: 5%;
   }
 
+  .homepage-container{
+    color: white;
+    text-shadow: 3px 3px #080808;
+  }
+
   .homepage-main-text{
     text-transform: uppercase;
     text-align: center;
+    font-size: 60px;
+    margin-bottom: 0px;
+    letter-spacing: 0.08em;
   }
 
   .homepage-sub-text{
     text-align: center;
+    text-transform: uppercase;
+    font-size: 40px;
+    margin-top: 0px;
   }
 
   .homepage-button-div{
@@ -346,11 +359,29 @@ ul{
   }
 
   .login-btn{
-    background: green;
+    background: #0000002e;
+    text-transform: uppercase;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    color: white;
+  }
+
+  .login-btn:hover{
+    background-color: #0000000c
   }
 
   .sign-up-btn{
-    background: red;
+    background: #0000002e;
+    text-transform: uppercase;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    color: white;
+  }
+
+  .sign-up-btn:hover{
+    background-color: #0000000c;
   }
 
   @media (max-width: 576px) {

@@ -14,11 +14,17 @@ module.exports = io => {
                 let pantryItemIDArr = await pantryModel.newEntry({ itemName: inputs.itemName, UID: inputs.UID })
                 await categoryItemModel.newEntry({ categoryID: categoryIDArr[0], itemID: pantryItemIDArr[0] })
                 //Insert socket emit here. The socket emission should update users front end view with new item
-                io.in(`room-${inputs.userID}`).emit('new-item', {
-                    itemName: inputs.itemName,
-                    category: inputs.category,
-                    UID: inputs.UID
-                })
+                if(!io.sockets.adapter.rooms[`room-${inputs.userID}`]){
+                    //Room not found dont send
+                    console.log("room not found")
+                }else{
+                    console.log("Sending")
+                    io.in(`room-${inputs.userID}`).emit('new-item', {
+                        itemName: inputs.itemName,
+                        category: inputs.category,
+                        UID: inputs.UID
+                    })
+                }
                 res.json({ status: "Success" })
             } else {
                 res.json({ status: "Error" })
@@ -32,9 +38,15 @@ module.exports = io => {
                 if (itemToRemoveArr.length > 0) {
                     pantryModel.delete(itemToRemoveArr[0].id)
                     categoryModel.delete(itemToRemoveArr[0].catID)
-                    io.in(`room-${inputs.userID}`).emit('remove-item', {
-                        UID: inputs.UID
-                    })
+                    if(!io.sockets.adapter.rooms[`room-${inputs.userID}`]){
+                        //not found
+                        console.log("NO")
+                    }else{
+                        console.log("YES")
+                        io.in(`room-${inputs.userID}`).emit('remove-item', {
+                            UID: inputs.UID
+                        })
+                    }
                     res.json({ status: "Success" })
                 } else {
                     res.json({ status: "Error" })

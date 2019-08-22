@@ -24,7 +24,7 @@ let mapDispatchToProps = {
 
 let formSubmit = (event, props) => {
     event.preventDefault()
-    fetch("http://10.185.0.162:3001/user/login", {
+    fetch("http://10.185.5.18:3001/user/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

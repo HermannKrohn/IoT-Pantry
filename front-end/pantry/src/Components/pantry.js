@@ -46,7 +46,7 @@ function Pantry(props){
     useEffect(() => {
         if(props.username.length > 0 && localStorage.getItem('token') !== null){
             //have username and token...just fetch
-            fetch(`http://10.185.0.162:3001/user/${props.username}/pantry`, {
+            fetch(`http://10.185.5.18:3001/user/${props.username}/pantry`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -59,7 +59,7 @@ function Pantry(props){
             })
         }else if(props.username.length < 1 && localStorage.getItem('token') !== null){
             //have token but no username. First fetch username then fetch pantry
-            fetch('http://10.185.0.162:3001/user/get-username',{
+            fetch('http://10.185.5.18:3001/user/get-username',{
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -70,7 +70,7 @@ function Pantry(props){
             }).then(json => {
                 if(json.status === "Success"){
                     //fetch like first if statement
-                    fetch(`http://10.185.0.162:3001/user/${json.username}/pantry`, {
+                    fetch(`http://10.185.5.18:3001/user/${json.username}/pantry`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
